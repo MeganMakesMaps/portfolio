@@ -24,12 +24,12 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: var(--dark);
-            line-height: 1.6;
+            line-height: 1.5;
             background: var(--cream);
-            overflow-x: hidden;
+            padding-top: 80px; /* Space for nav */
         }
 
-       /* Navigation styling (Matching your homepage) */
+        /* Nav (Matching your existing style) */
         nav {
             position: fixed;
             top: 0;
@@ -46,7 +46,6 @@
             display: flex;
             justify-content: center;
             gap: 2rem;
-            margin: 0;
         }
 
         nav a {
@@ -56,34 +55,36 @@
             text-transform: uppercase;
             font-size: 0.9rem;
             letter-spacing: 1px;
+            transition: color 0.3s;
         }
 
-        /* Resume Container */
-        .resume-container {
-            max-width: 900px;
+        nav a:hover { color: var(--teal); }
+
+        /* Main Container */
+        .resume-page {
+            max-width: 950px;
             margin: 2rem auto;
             background: var(--white);
-            padding: 3rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            border-radius: 8px;
+            padding: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-radius: 4px;
         }
 
         header {
             text-align: center;
-            border-bottom: 2px solid var(--teal);
-            padding-bottom: 1.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             color: var(--teal);
+            letter-spacing: 1px;
             margin-bottom: 0.5rem;
         }
 
         .contact-info {
-            font-size: 0.9rem;
-            color: #666;
+            font-size: 1rem;
+            color: var(--gray);
         }
 
         .contact-info a {
@@ -91,58 +92,71 @@
             text-decoration: none;
         }
 
+        /* Sections */
         section {
             margin-bottom: 2rem;
         }
 
         h2 {
             text-transform: uppercase;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--teal);
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 1rem;
-            padding-bottom: 0.3rem;
+            border-bottom: 2px solid var(--teal);
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.2rem;
+            letter-spacing: 1.5px;
         }
 
-        .job, .edu {
+        .entry {
             margin-bottom: 1.5rem;
         }
 
-        .row {
+        .entry-header {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
-        }
-
-        .job-title, .school {
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
         }
 
-        .date, .location {
+        .sub-header {
+            display: flex;
+            justify-content: space-between;
             font-style: italic;
-            color: #777;
-            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 0.4rem;
         }
 
         ul {
-            margin-top: 0.5rem;
-            padding-left: 1.5rem;
+            padding-left: 1.2rem;
+            margin-top: 0.3rem;
         }
 
         li {
             margin-bottom: 0.3rem;
         }
 
-        .skills-grid {
+        .skills-list {
+            list-style: none;
+            padding-left: 0;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .presentation-entry, .award-entry {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Print formatting */
+        @media print {
+            body { background: white; padding-top: 0; }
+            nav { display: none; }
+            .resume-page { box-shadow: none; padding: 0; margin: 0; }
         }
 
         @media (max-width: 600px) {
-            .resume-container { padding: 1.5rem; margin: 1rem; }
-            .row { flex-direction: column; }
+            .resume-page { padding: 1.5rem; margin: 1rem; }
+            .entry-header, .sub-header { flex-direction: column; }
         }
     </style>
 </head>
@@ -152,83 +166,144 @@
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="resume.html">Resume</a></li>
-            <!-- Add other links here -->
         </ul>
     </nav>
 
-    <div class="resume-container">
+    <div class="resume-page">
         <header>
             <h1>Megan B. Bourque</h1>
             <div class="contact-info">
-                Knoxville, Tennessee • (423) 888-6442<br>
-                <a href="mailto:Mbbourque1@gmail.com">Mbbourque1@gmail.com</a> • 
-                <a href="https://www.linkedin.com/in/megan-bourque/" target="_blank">LinkedIn</a>
+                Knoxville, Tennessee ● (423)888-6442 ● <a href="mailto:Mbbourque1@gmail.com">Mbbourque1@gmail.com</a><br>
+                <a href="https://www.linkedin.com/in/megan-bourque/" target="_blank">linkedin.com/in/megan-bourque/</a>
             </div>
         </header>
 
         <section>
             <h2>Education</h2>
-            <div class="edu">
-                <div class="row">
-                    <span class="school">University of Tennessee Knoxville</span>
-                    <span class="date">08/2020 – 12/2024</span>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>University of Tennessee Knoxville</span>
+                    <span>Knoxville, TN</span>
                 </div>
-                <div>B.A. Physics, Minor in Geology – GPA 3.36/4.0</div>
+                <div class="sub-header">
+                    <span>B.A. Physics, Minor in Geology – GPA 3.36/4.0</span>
+                    <span>08/2020 – 12/2024</span>
+                </div>
             </div>
-            <div class="edu">
-                <div class="row">
-                    <span class="school">Chattanooga State Community College</span>
-                    <span class="date">05/2018 – 08/2021</span>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>Chattanooga State Community College</span>
+                    <span>Kimball, TN</span>
                 </div>
-                <div>Dual Enrollment / General Studies – GPA 3.87/4.0</div>
+                <div class="sub-header">
+                    <span>No Degree - GPA 3.878/4.0</span>
+                    <span>05/2018- 08/2021</span>
+                </div>
+                <ul>
+                    <li>Dual enrollment with high school and University of Tennessee Knoxville.</li>
+                </ul>
             </div>
         </section>
 
         <section>
-            <h2>Technical Skills</h2>
-            <div class="skills-grid">
-                <div><strong>GIS:</strong> ArcGIS Pro, QGIS</div>
-                <div><strong>Languages:</strong> Python, MATLAB</div>
-                <div><strong>Tools:</strong> Google Suite, MS Excel</div>
-            </div>
+            <h2>Skills</h2>
+            <ul class="skills-list">
+                <li>● ArcGIS Pro & QGIS</li>
+                <li>● Python & MATLAB</li>
+                <li>● Google Suite</li>
+                <li>● Microsoft Excel, PowerPoint, and Word</li>
+            </ul>
         </section>
 
         <section>
-            <h2>Professional Experience</h2>
+            <h2>Experience</h2>
             
-            <div class="job">
-                <div class="row">
-                    <span class="job-title">STEAM Outreach Educator, Mobile Planetarium Lead</span>
-                    <span class="date">02/2025 – Present</span>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>Muse Knoxville</span>
+                    <span>02/2025 – Present</span>
                 </div>
-                <div class="location">Muse Knoxville</div>
+                <div class="sub-header">STEAM Outreach Educator, Mobile Planetarium Lead</div>
                 <ul>
-                    <li>Deliver hands-on STEAM programs to Pre-K through 5th grade students across East Tennessee.</li>
-                    <li>Operate Mobile Planetarium, adapting astronomy content for diverse educational backgrounds.</li>
-                    <li>Developed strong science communication skills by making technical content approachable.</li>
+                    <li>Traveled across East Tennessee to deliver engaging, hands-on STEAM programs to Pre-K through 5th grade students in schools, libraries, and community centers.</li>
+                    <li>Delivered presentations to audiences ranging from toddlers to adults, developing strong science communication skills and the ability to make technical content approachable and exciting.</li>
+                    <li>Operated and presented shows using a Mobile Planetarium, tailoring astronomy content to suit a wide range of age groups and educational backgrounds.</li>
+                    <li>Designed and adapted educational content to align with learning standards.</li>
+                    <li>Trained new educators and volunteers.</li>
                 </ul>
             </div>
 
-            <div class="job">
-                <div class="row">
-                    <span class="job-title">Undergraduate Research Assistant</span>
-                    <span class="date">12/2022 – 12/2024</span>
+            <div class="entry">
+                <div class="entry-header">
+                    <span>University of Tennessee Knoxville - Dept. of Earth, Environmental, & Planetary Science</span>
+                    <span>12/2022 - 12/2024</span>
                 </div>
-                <div class="location">UTK Dept. of Earth, Environmental, and Planetary Science</div>
+                <div class="sub-header">Undergraduate Research Assistant</div>
                 <ul>
-                    <li>Used Mini-RF data in ArcGIS Pro to analyze and create maps of the lunar surface.</li>
-                    <li>Created hazard maps for potential NASA Artemis mission landing sites.</li>
-                    <li>Presented research at the International Lunar and Planetary Science Conference.</li>
+                    <li>Used monostatic, bistatic, and stereo Mini-RF data using ArcGIS to analyze and create maps of the lunar surface.</li>
+                    <li>Became proficient with ESRI ArcGIS Pro and to collect data and create hazard maps for research on potential landing sites for NASA’s Artemis mission.</li>
+                    <li>Presented this research at the international Lunar and Planetary Science Conference and local science conferences.</li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span>University of Tennessee Knoxville - Department of Physics & Astronomy</span>
+                    <span>01/2022 – 12/2024</span>
+                </div>
+                <div class="sub-header">Undergraduate Teaching Assistant</div>
+                <ul>
+                    <li>Assisted students to better understand the fundamentals of physics and astronomy.</li>
+                    <li>Trained graduate Teaching Assistants on how to use ground-based telescopes owned by the University of Tennessee Knoxville.</li>
+                    <li>Used ground-based telescopes to teach undergraduate students about astronomy, often providing supplementary information to what students have learned from lectures.</li>
+                    <li>Aided in leading supplementary lectures for students as a review for quizzes and exams.</li>
+                    <li>Collaborated closely with a professor to organize class materials and grade students’ submitted works.</li>
+                    <li>Wrote and edited weekly newsletters with supplementary information to aid students with lessons learned in class.</li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span>NASA & ASU L’SPACE Mission Concept Academy</span>
+                    <span>01/2022 – 05/2022</span>
+                </div>
+                <ul>
+                    <li>12-week competitive course to improve skills in mission development by training each week with NASA scientists and engineers.</li>
+                    <li>Worked with a team to design a space mission under guidance of NASA employees, resulting in a 90-page Preliminary Design Review.</li>
+                    <li><strong>Earned skill badges:</strong> Organizational Charts, Gantt Charts, Requirements, Risk Management, Systems, Heat Systems, Budgets.</li>
                 </ul>
             </div>
         </section>
 
         <section>
-            <h2>Awards & Leadership</h2>
+            <h2>Presentations</h2>
+            <div class="presentation-entry">
+                <strong>55th Lunar and Planetary Science Conference</strong>, The Woodlands, TX (March 2024)<br>
+                Hazard Mapping of the Southern Lunar Surface: Candidate Artemis Landing Site - Malapert Massif
+            </div>
+            <div class="presentation-entry">
+                <strong>EUReCA 2024</strong>, Knoxville, TN (April 2024)<br>
+                Hazard Mapping of the Southern Lunar Surface: Candidate Artemis Landing Site - Malapert Massif
+            </div>
+        </section>
+
+        <section>
+            <h2>Awards & Honors</h2>
+            <ul class="award-entry">
+                <li>Volunteer of Distinction Award from the University of Tennessee Knoxville – March 27, 2025</li>
+                <li>NASA Space Grant Undergraduate Award – May 2, 2024</li>
+                <li>The Otto Kopp Undergraduate Research Award – May 2, 2024</li>
+                <li>Tennessee NASA Space Grant - Summer 2023, Fall 2023, Spring 2024</li>
+                <li>Advanced Undergraduate Research Activity (AURA) – Summer 2023</li>
+                <li>Faculty Research Assistant FRAF at the University of Tennessee Knoxville – Spring 2023</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Leadership Experience</h2>
             <ul>
-                <li><strong>Volunteer of Distinction Award</strong> (UTK, 2025)</li>
-                <li><strong>NASA Space Grant Undergraduate Award</strong> (2024)</li>
-                <li><strong>Astronomy Club President</strong> (2 Years)</li>
+                <li><strong>Astronomy Club at the University of Tennessee Knoxville:</strong> President for 2 years, Vice President for 1 year, Secretary for 1 semester</li>
+                <li><strong>Society of Physics Students:</strong> Secretary for 1 year, Historian for 1 year, Outreach Coordinator for 1 year</li>
             </ul>
         </section>
     </div>
