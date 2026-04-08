@@ -6,14 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GIS Portfolio | Megan Bourque</title>
+    <title>Resume | Megan B. Bourque</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        
         :root {
             --teal: hsl(177, 94%, 35%);
             --orange: #f1821a;
@@ -34,6 +29,7 @@
             overflow-x: hidden;
         }
 
+       /* Navigation styling (Matching your homepage) */
         nav {
             position: fixed;
             top: 0;
@@ -50,35 +46,192 @@
             display: flex;
             justify-content: center;
             gap: 2rem;
+            margin: 0;
         }
 
         nav a {
             text-decoration: none;
             color: var(--dark);
             font-weight: 600;
-            font-size: 0.95rem;
             text-transform: uppercase;
+            font-size: 0.9rem;
             letter-spacing: 1px;
-            transition: color 0.3s;
-            position: relative;
         }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: var(--teal);
-            transition: width 0.3s;
+        /* Resume Container */
+        .resume-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: var(--white);
+            padding: 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-radius: 8px;
         }
 
-        nav a:hover::after {
-            width: 100%;
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--teal);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
-        nav a:hover {
+        header h1 {
+            font-size: 2.5rem;
             color: var(--teal);
+            margin-bottom: 0.5rem;
         }
 
+        .contact-info {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .contact-info a {
+            color: var(--teal);
+            text-decoration: none;
+        }
+
+        section {
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            color: var(--teal);
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 1rem;
+            padding-bottom: 0.3rem;
+        }
+
+        .job, .edu {
+            margin-bottom: 1.5rem;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .job-title, .school {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .date, .location {
+            font-style: italic;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        ul {
+            margin-top: 0.5rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.3rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .resume-container { padding: 1.5rem; margin: 1rem; }
+            .row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <!-- Add other links here -->
+        </ul>
+    </nav>
+
+    <div class="resume-container">
+        <header>
+            <h1>Megan B. Bourque</h1>
+            <div class="contact-info">
+                Knoxville, Tennessee • (423) 888-6442<br>
+                <a href="mailto:Mbbourque1@gmail.com">Mbbourque1@gmail.com</a> • 
+                <a href="https://www.linkedin.com/in/megan-bourque/" target="_blank">LinkedIn</a>
+            </div>
+        </header>
+
+        <section>
+            <h2>Education</h2>
+            <div class="edu">
+                <div class="row">
+                    <span class="school">University of Tennessee Knoxville</span>
+                    <span class="date">08/2020 – 12/2024</span>
+                </div>
+                <div>B.A. Physics, Minor in Geology – GPA 3.36/4.0</div>
+            </div>
+            <div class="edu">
+                <div class="row">
+                    <span class="school">Chattanooga State Community College</span>
+                    <span class="date">05/2018 – 08/2021</span>
+                </div>
+                <div>Dual Enrollment / General Studies – GPA 3.87/4.0</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div><strong>GIS:</strong> ArcGIS Pro, QGIS</div>
+                <div><strong>Languages:</strong> Python, MATLAB</div>
+                <div><strong>Tools:</strong> Google Suite, MS Excel</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Professional Experience</h2>
+            
+            <div class="job">
+                <div class="row">
+                    <span class="job-title">STEAM Outreach Educator, Mobile Planetarium Lead</span>
+                    <span class="date">02/2025 – Present</span>
+                </div>
+                <div class="location">Muse Knoxville</div>
+                <ul>
+                    <li>Deliver hands-on STEAM programs to Pre-K through 5th grade students across East Tennessee.</li>
+                    <li>Operate Mobile Planetarium, adapting astronomy content for diverse educational backgrounds.</li>
+                    <li>Developed strong science communication skills by making technical content approachable.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="row">
+                    <span class="job-title">Undergraduate Research Assistant</span>
+                    <span class="date">12/2022 – 12/2024</span>
+                </div>
+                <div class="location">UTK Dept. of Earth, Environmental, and Planetary Science</div>
+                <ul>
+                    <li>Used Mini-RF data in ArcGIS Pro to analyze and create maps of the lunar surface.</li>
+                    <li>Created hazard maps for potential NASA Artemis mission landing sites.</li>
+                    <li>Presented research at the International Lunar and Planetary Science Conference.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Awards & Leadership</h2>
+            <ul>
+                <li><strong>Volunteer of Distinction Award</strong> (UTK, 2025)</li>
+                <li><strong>NASA Space Grant Undergraduate Award</strong> (2024)</li>
+                <li><strong>Astronomy Club President</strong> (2 Years)</li>
+            </ul>
+        </section>
+    </div>
+
+</body>
+</html>
