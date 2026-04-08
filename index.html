@@ -1,10 +1,442 @@
+<!doctype html>
+<html itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styling.css">
     <title>GIS Portfolio | Megan B. Bourque</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --teal: hsl(177, 94%, 35%);
+            --orange: #f1821a;
+            --yellow: #fdd831;
+            --green: #6A994E;
+            --brown: #8B5A3C;
+            --cream: #FAF3E0;
+            --dark: #055664;
+            --light-gray: #EDF2F4;
+            --tuqoise: #40E0D0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background: var(--cream);
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(250, 243, 224, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--teal);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--teal);
+        }
+
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.5rem;
+            color: var(--teal);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--orange);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(231, 111, 81, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(231, 111, 81, 0.4);
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape.circle {
+            width: 150px;
+            height: 150px;
+            background: var(--teal);
+            border-radius: 50%;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape.blob1 {
+            width: 200px;
+            height: 200px;
+            background: var(--yellow);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            top: 60%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .shape.triangle {
+            width: 0;
+            height: 0;
+            border-left: 80px solid transparent;
+            border-right: 80px solid transparent;
+            border-bottom: 140px solid var(--green);
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .shape.blob2 {
+            width: 180px;
+            height: 180px;
+            background: var(--orange);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            top: 15%;
+            right: 25%;
+            animation-delay: 1.5s;
+        }
+
+        .shape.square {
+            width: 100px;
+            height: 100px;
+            background: var(--brown);
+            transform: rotate(45deg);
+            bottom: 30%;
+            right: 10%;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            color: var(--dark);
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--yellow), var(--orange));
+            border-radius: 2px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--teal), var(--yellow), var(--orange));
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .project-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: var(--light-gray);
+            color: var(--teal);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-content p {
+            margin-top: 1rem;
+            color: #666;
+        }
+
+        #about {
+            background: white;
+            border-radius: 30px;
+            padding: 4rem 3rem;
+            margin: 3rem auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #about::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--yellow);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        #about::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 150px;
+            height: 150px;
+            background: var(--green);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            opacity: 0.3;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--teal);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .skills-list {
+            list-style: none;
+        }
+
+        .skills-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--light-gray);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .skills-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--orange);
+            font-weight: bold;
+        }
+
+        #contact {
+            text-align: center;
+            background: linear-gradient(60deg, var(--teal), var(--tuqoise));
+            color: white;
+            border-radius: 30px;
+            padding: 4rem 2rem;
+        }
+
+        #contact h2 {
+            color: white;
+        }
+
+        #contact h2::after {
+            background: white;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: white;
+            color: var(--teal);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .contact-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--dark);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .hero-content .subtitle {
+                font-size: 1.2rem;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            section {
+                padding: 3rem 1rem;
+            }
+            .shape {
+                opacity: 0.3;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -27,39 +459,37 @@
             <h1>Megan Bourque</h1>
             <p class="subtitle">GIS Analyst & Cartographer</p>
             <p>Transforming spatial data into meaningful insights through innovative mapping and analysis</p>
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="#projects" class="cta-button">View My Work</a>
-                <a href="resume.html" class="cta-button">View My Resume</a>
-            </div>
+            <a href="#projects" class="cta-button">View My Work</a>
+            <a href="resume.html" class="cta-button">View My Resume</a>
         </div>
     </section>
 
-    <section id="projects" class="homepage-section">
+    <section id="projects">
         <h2>Featured Projects</h2>
         <div class="projects-grid">
             <div class="project-card">
                 <div class="project-image">🗺️</div>
                 <div class="project-content">
-                    <h3>Lunar Hazard Mapping</h3>
+                    <h3>NAME HERE</h3>
                     <div>
                         <span class="project-tag">ArcGIS Pro</span>
                         <span class="project-tag">Python</span>
                         <span class="project-tag">Spatial Analysis</span>
                     </div>
-                    <p>Analyzed monostatic and bistatic Mini-RF data to create hazard maps for potential Artemis landing sites.</p>
+                    <p>Description.</p>
                 </div>
             </div>
 
             <div class="project-card">
                 <div class="project-image">🏰</div>
                 <div class="project-content">
-                    <h3>Remote Sensing Analysis</h3>
+                    <h3>Description</h3>
                     <div>
                         <span class="project-tag">Remote Sensing</span>
                         <span class="project-tag">QGIS</span>
                         <span class="project-tag">Satellite Imagery</span>
                     </div>
-                    <p>Utilized satellite data for environmental monitoring and spatial pattern recognition.</p>
+                    <p>Description.</p>
                 </div>
             </div>
 
@@ -68,9 +498,9 @@
                 <div class="project-content">
                     <h3>Pedestrian Accessibility Mapping</h3>
                     <div>
-                        <span class="project-tag">Urban Planning</span>
-                        <span class="project-tag">Network Analysis</span>
-                        <span class="project-tag">Accessibility</span>
+                        <span class="project-tag">Skill</span>
+                        <span class="project-tag">Skill</span>
+                        <span class="project-tag">Skill</span>
                     </div>
                     <p>Created interactive maps showing walkability scores and access to essential services for urban neighborhoods.</p>
                 </div>
@@ -79,7 +509,7 @@
             <div class="project-card">
                 <div class="project-image">📊</div>
                 <div class="project-content">
-                    <h3>Demographic Visualization</h3>
+                    <h3>Demographic Change Visualization</h3>
                     <div>
                         <span class="project-tag">Census Data</span>
                         <span class="project-tag">Cartography</span>
@@ -98,34 +528,34 @@
                         <span class="project-tag">Service Areas</span>
                         <span class="project-tag">Public Health</span>
                     </div>
-                    <p>Identified underserved areas and optimal locations for new healthcare facilities using drive-time analysis.</p>
+                    <p>Identified underserved areas and optimal locations for new healthcare facilities using drive-time analysis and population data.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="about" class="homepage-section">
-        <div id="about-container"> <h2>About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Background</h3>
-                    <p>I'm a passionate GIS professional transforming complex spatial data into actionable insights. My work spans environmental analysis, planetary science, hazard mapping, and data visualization.</p>
-                    <p>I believe in the power of maps to tell stories, solve problems, and drive meaningful change in our communities.</p>
-                    <h3 style="margin-top: 2rem;">Education</h3>
-                    <p><strong>B.A. Physics, Minor in Geology</strong><br>
-                    University of Tennessee Knoxville, 2024</p>
-                </div>
-                <div class="about-skills">
-                    <h3>Technical Skills</h3>
-                    <ul class="skills-list">
-                        <li>ArcGIS Pro & ArcGIS Online</li>
-                        <li>QGIS</li>
-                        <li>Python & MATLAB</li>
-                        <li>Remote Sensing & Image Analysis</li>
-                        <li>Cartographic Design</li>
-                        <li>GPS & Field Data Collection</li>
-                    </ul>
-                </div>
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Background</h3>
+                <p>I'm a passionate GIS professional with 3 years of experience transforming complex spatial data into actionable insights. My work spans environmental analysis, utility management, hazard mapping, business geographics, and data visualization.</p>
+                <p>I believe in the power of maps to tell stories, solve problems, and drive meaningful change in our communities.</p>
+                <h3 style="margin-top: 2rem;">Education</h3>
+                <p><strong>B.A. Physics & Geology </strong><br>
+                Univesity of Tennessee Knoxville, 2024</p>
+            </div>
+            <div class="about-skills">
+                <h3>Technical Skills</h3>
+                <ul class="skills-list">
+                    <li>ArcGIS Pro & ArcGIS Online</li>
+                    <li>QGIS</li>
+                    <li>QuickMap</li>
+                    <li>Python & MATLAB</li>
+                    <li>Remote Sensing & Image Analysis</li>
+                    <li>Cartographic Design</li>
+                    <li>GPS & Field Data Collection</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -136,6 +566,7 @@
         <div class="contact-links">
             <a href="mailto:meganmakesmaps@gmail.com" class="contact-link">Email Me</a>
             <a href="https://www.linkedin.com/in/megan-bourque/" class="contact-link">LinkedIn</a>
+            <a href="" class="contact-link">GitHub</a>
             <a href="resume.html" class="contact-link">View My Resume</a>
         </div>
     </section>
@@ -145,7 +576,6 @@
     </footer>
 
     <script>
-        // Smooth scrolling for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -159,7 +589,6 @@
             });
         });
 
-        // Navigation active state on scroll
         window.addEventListener('scroll', () => {
             let current = '';
             const sections = document.querySelectorAll('section');
@@ -181,4 +610,5 @@
         });
     </script>
 </body>
+</html>
 </html>
